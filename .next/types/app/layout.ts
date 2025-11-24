@@ -1,4 +1,4 @@
-// File: D:\Work\nextjs-airbapay-template\app\layout.tsx
+// File: D:\Work\novabusiness.kz\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
