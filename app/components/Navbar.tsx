@@ -5,10 +5,15 @@ import React, { useState } from 'react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const toggleDesktopMenu = () => {
+    setIsDesktopMenuOpen((prev) => !prev);
+  };
+
   const navLinks = [
     { name: 'О нас', href: '/about', icon: '👥' },
     { name: 'Магазин', href: '/shop', icon: '🛒' },
@@ -23,6 +28,9 @@ const Navbar = () => {
     { name: 'Maps', href: '/maps', icon: '📍' },
     { name: 'Клиенты', href: '/clients', icon: '🤝' },
   ];
+  const prioritizedLinks = ['О нас', 'Кредиты', 'Рассрочка', 'Франшиза'];
+  const primaryLinks = navLinks.filter((link) => prioritizedLinks.includes(link.name));
+  const overflowLinks = navLinks.filter((link) => !prioritizedLinks.includes(link.name));
 
   return (
     <nav className="bg-gray-900 text-white shadow-lg">
@@ -37,8 +45,8 @@ const Navbar = () => {
           </div>
           
           {/* Navigation Links */}
-          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4 lg:space-x-6">
-            {navLinks.map((link) => (
+          <div className="hidden md:flex md:items-center md:space-x-4 lg:space-x-6">
+            {primaryLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
@@ -47,6 +55,17 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            {overflowLinks.length > 0 && (
+              <button
+                onClick={toggleDesktopMenu}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-md border border-teal-400 text-teal-300 hover:bg-teal-500/10 transition-colors duration-200"
+                aria-expanded={isDesktopMenuOpen}
+                aria-label="Открыть меню"
+              >
+                <span className="text-lg">☰</span>
+                <span>МЕНЮ</span>
+              </button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -71,6 +90,29 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Desktop slide-out menu */}
+      {overflowLinks.length > 0 && (
+        <div
+          className={`hidden md:block fixed top-16 right-0 h-[calc(100vh-4rem)] w-64 bg-gray-900 border-l border-gray-800 shadow-xl transform transition-transform duration-300 ${
+            isDesktopMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="p-4 space-y-3">
+            {overflowLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                onClick={() => setIsDesktopMenuOpen(false)}
+              >
+                <span className="text-lg">{link.icon}</span>
+                <span className="text-sm font-medium">{link.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Mobile menu */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
