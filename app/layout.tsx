@@ -3,7 +3,7 @@ import React from 'react'
 import Navbar from './components/Navbar'
 
 export const metadata = {
-  title: 'AirbaPay Frontend',
+  title: 'Рассрочка с AirbaPay',
   description: 'MVP frontend for AirbaPay integration',
 }
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           <footer className="bg-white border-t">
             <div className="max-w-6xl mx-auto px-4 py-4 text-sm text-gray-500">
-              © {new Date().getFullYear()} AirbaPay Demo
+              © {new Date().getFullYear()} NovaBusiness
             </div>
           </footer>
         </main>
