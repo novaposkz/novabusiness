@@ -55,6 +55,32 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            
+            {/* Search Button */}
+            <button 
+              className="p-2 text-gray-300 hover:text-white transition-colors duration-200"
+              aria-label="Поиск"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+            
+            {/* Language Switcher */}
+            <div className="flex items-center text-sm text-gray-300 space-x-1">
+              <button className="hover:text-white transition-colors duration-200">KZ</button>
+              <span>|</span>
+              <button className="text-teal-400 font-medium hover:text-teal-300 transition-colors duration-200">RU</button>
+            </div>
+            
+            {/* Login Button */}
+            <button 
+              className="px-3 py-1.5 text-sm font-medium rounded-md text-white hover:bg-gray-700 transition-colors duration-200"
+              aria-label="Вход"
+            >
+              Вход
+            </button>
+            
             {overflowLinks.length > 0 && (
               <button
                 onClick={toggleDesktopMenu}
@@ -116,13 +142,43 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-        <div className="px-4 py-3">
-          <div className="grid grid-cols-3 gap-3">
+        <div className="px-4 py-3 space-y-4">
+          {/* Mobile Search Bar */}
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              placeholder="Поиск..."
+            />
+          </div>
+
+          {/* Mobile Language and Login */}
+          <div className="flex items-center justify-between px-2 py-2">
+            <div className="flex items-center space-x-3">
+              <span className="text-sm text-gray-300">Язык:</span>
+              <div className="flex items-center space-x-2">
+                <button className="px-3 py-1 text-sm rounded-md bg-gray-800 text-white hover:bg-gray-700">KZ</button>
+                <button className="px-3 py-1 text-sm rounded-md bg-teal-600 text-white hover:bg-teal-700">RU</button>
+              </div>
+            </div>
+            <button className="px-4 py-1.5 text-sm font-medium rounded-md bg-teal-600 text-white hover:bg-teal-700 transition-colors duration-200">
+              Вход
+            </button>
+          </div>
+
+          {/* Mobile Navigation Links */}
+          <div className="grid grid-cols-3 gap-3 pt-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 className="flex flex-col items-center justify-center p-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
               >
                 <span className="text-2xl mb-1">{link.icon}</span>
                 <span className="text-xs font-medium text-center">{link.name}</span>
