@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
+import AuthModal from './AuthModal';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -75,6 +77,7 @@ const Navbar = () => {
             
             {/* Login Button */}
             <button 
+              onClick={() => setIsAuthModalOpen(true)}
               className="px-3 py-1.5 text-sm font-medium rounded-md text-white hover:bg-gray-700 transition-colors duration-200"
               aria-label="Вход"
             >
@@ -166,7 +169,13 @@ const Navbar = () => {
                 <button className="px-3 py-1 text-sm rounded-md bg-teal-600 text-white hover:bg-teal-700">RU</button>
               </div>
             </div>
-            <button className="px-4 py-1.5 text-sm font-medium rounded-md bg-teal-600 text-white hover:bg-teal-700 transition-colors duration-200">
+            <button 
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsAuthModalOpen(true);
+              }} 
+              className="px-4 py-1.5 text-sm font-medium rounded-md bg-teal-600 text-white hover:bg-teal-700 transition-colors duration-200"
+            >
               Вход
             </button>
           </div>
@@ -187,6 +196,12 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </nav>
   );
 };
