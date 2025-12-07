@@ -1,4 +1,4 @@
-Next.js 14 + TypeScript + Tailwind — AirbaPay frontend template
+Next.js 16 + TypeScript + Tailwind — AirbaPay frontend template
 
 Run locally:
 1. npm install
